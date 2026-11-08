@@ -1,0 +1,137 @@
+/* =====================================================================
+   LAEL IQ  —  RESPONSIVE LAYER (موبايل / آيباد / لابتوب)
+   يُحمَّل بعد glow.css في صفحات الموقع.
+===================================================================== */
+
+/* ---------- أساسيات تمنع التمدد الأفقي ---------- */
+html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+}
+body{
+    overflow-x:clip;           /* clip بدل hidden حتى ما يخرب التثبيت */
+    max-width:100%;
+}
+img,video,svg,canvas{max-width:100%;}
+input,select,textarea,button{max-width:100%;}
+
+/* ---------- الهيدر الثابت (يفعّله layout.js) ---------- */
+body.has-fixed-nav .navbar{
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    width:100%;
+    z-index:1000;
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    background:rgba(5,5,5,.97);
+}
+
+/* ---------- الإشعارات: ثابتة تحت الهيدر مباشرة ---------- */
+body .lael-message{
+    position:fixed;
+    top:calc(var(--nav-bottom, 84px) + 10px);
+    right:24px;
+    left:auto;
+    z-index:100000;
+    max-width:min(420px, calc(100vw - 28px));
+    pointer-events:none;
+}
+
+/* ---------- لابتوب صغير + آيباد أفقي ---------- */
+@media (max-width:1100px){
+    body .navbar{gap:12px;}
+    body .nav-links{gap:16px;}
+}
+
+/* ---------- آيباد عمودي وتابلت ---------- */
+@media (max-width:900px){
+    body .navbar{padding-left:3.5%;padding-right:3.5%;}
+    body .nav-links{display:none;}
+    body .lael-search-wrap{width:200px;}
+}
+
+/* ---------- موبايل ---------- */
+@media (max-width:650px){
+
+    /* هيدر مضغوط حتى ياخذ مساحة أقل من الشاشة */
+    body .navbar{
+        height:auto;
+        min-height:0;
+        padding:8px 4% 9px;
+        gap:6px;
+        flex-wrap:wrap;
+        align-content:center;
+    }
+    body .navbar .logo{
+        order:0;
+        width:100%;
+        min-width:0;
+        text-align:center;
+        line-height:1.1;
+    }
+    body .navbar .logo h1{
+        font-size:24px;
+        margin:0;
+        letter-spacing:2px;
+    }
+    body .navbar .logo span{
+        display:block;
+        font-size:7.5px;
+        letter-spacing:1.6px;
+        margin-top:1px;
+    }
+    body .nav-actions{
+        order:2;
+        width:100%;
+        gap:6px;
+    }
+    body .lael-search-wrap{
+        flex:1;
+        width:auto;
+        min-width:0;
+    }
+    body .lael-search-wrap .search{height:38px;font-size:14px;}
+
+    /* أزرار الهيدر بحجم مريح للمس */
+    body .icon-btn,
+    body .account-icon,
+    body .admin-shortcut{
+        width:38px;
+        height:38px;
+        flex:0 0 38px;
+    }
+    body .account-link{padding:0 2px;font-size:10px;gap:4px;}
+
+    /* الإشعار: بعرض الشاشة تحت الهيدر */
+    body .lael-message{
+        left:12px;
+        right:12px;
+        max-width:none;
+        text-align:center;
+        padding:11px 14px;
+        font-size:13px;
+    }
+
+    /* حقول الإدخال: 16px تمنع تكبير آيفون التلقائي */
+    body input:not([type="checkbox"]):not([type="radio"]),
+    body select,
+    body textarea{
+        font-size:16px;
+    }
+}
+
+/* ---------- موبايلات صغيرة جداً ---------- */
+@media (max-width:360px){
+    body .navbar .logo h1{font-size:21px;}
+    body .account-link #accountText{display:none;}
+    body .icon-btn,
+    body .account-icon,
+    body .admin-shortcut{width:36px;height:36px;flex-basis:36px;}
+}
+
+/* ---------- موبايل بوضع أفقي: هيدر أقل ارتفاعاً ---------- */
+@media (max-height:480px) and (orientation:landscape){
+    body .navbar .logo span{display:none;}
+}

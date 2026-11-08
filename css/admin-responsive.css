@@ -1,0 +1,140 @@
+/* =====================================================================
+   LAEL IQ — ADMIN RESPONSIVE (لوحة الإدارة على الموبايل والتابلت)
+===================================================================== */
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{overflow-x:clip;max-width:100%;}
+body .main{min-width:0;max-width:100%;}
+
+/* الجداول العريضة تتحرك داخل صندوقها بدل ما توسّع الصفحة */
+body .panel{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* =====================================================================
+   القائمة الجانبية: سكرول عمودي (صعود ونزول) لما الشاشة تكون قصيرة
+   (ديسكتوب / لابتوب / آيباد / موبايل أفقي)
+===================================================================== */
+@media (min-width:701px){
+    body .sidebar{
+        height:100vh;
+        height:100dvh;
+        display:flex;
+        flex-direction:column;
+        overflow-y:auto;
+        overflow-x:hidden;
+        overscroll-behavior:contain;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:thin;
+        scrollbar-color:rgba(224,173,54,.55) transparent;
+    }
+    body .sidebar::-webkit-scrollbar{width:6px;}
+    body .sidebar::-webkit-scrollbar-track{background:transparent;}
+    body .sidebar::-webkit-scrollbar-thumb{
+        background:rgba(224,173,54,.45);
+        border-radius:6px;
+    }
+    body .sidebar::-webkit-scrollbar-thumb:hover{background:rgba(242,197,76,.8);}
+
+    body .sidebar .logo,
+    body .sidebar .admin-label,
+    body .sidebar .menu{flex:0 0 auto;}
+
+    body .sidebar .menu{margin-bottom:24px;}
+
+    /* زر الخروج يصير بنهاية القائمة بدل ما يغطي الخيارات */
+    body .sidebar .logout{
+        position:static;
+        flex:0 0 auto;
+        width:100%;
+        margin-top:auto;
+        right:auto;
+        bottom:auto;
+    }
+}
+
+@media (max-width:700px){
+
+    /* القائمة الجانبية تصير شريط علوي ثابت بقائمة أفقية */
+    body .sidebar{
+        position:sticky;
+        top:0;
+        z-index:900;
+        width:100%;
+        height:auto;
+        min-height:0;
+        padding:8px 10px 6px;
+        border-left:0;
+        border-bottom:1px solid rgba(var(--gold-rgb,224,173,54),.35);
+        box-shadow:0 2px 18px rgba(var(--gold-rgb,224,173,54),.15);
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        overflow:visible;
+        align-items:center;
+        justify-content:space-between;
+        gap:6px 10px;
+        background:rgba(10,10,10,.97);
+        -webkit-backdrop-filter:blur(10px);
+        backdrop-filter:blur(10px);
+    }
+    body .sidebar .logo{
+        margin:0;
+        padding:0;
+        text-align:right;
+        flex:1;
+        min-width:0;
+    }
+    body .sidebar .logo h1{font-size:20px;margin:0;letter-spacing:2px;}
+    body .sidebar .logo span{font-size:7px;letter-spacing:1.4px;}
+    body .sidebar .admin-label{display:none;}
+
+    body .sidebar .logout{
+        position:static;
+        width:auto;
+        margin:0;
+        padding:6px 12px;
+        font-size:12px;
+        height:auto;
+    }
+
+    body .sidebar .menu{
+        order:3;
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        gap:6px;
+        margin:0;
+        padding:2px 0 4px;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+    }
+    body .sidebar .menu::-webkit-scrollbar{display:none;}
+    body .sidebar .menu a{
+        flex:0 0 auto;
+        white-space:nowrap;
+        margin:0;
+        padding:7px 12px;
+        font-size:12.5px;
+        border-radius:8px;
+    }
+
+    body .main{
+        margin-right:0;
+        margin-left:0;
+        padding:16px 12px 40px;
+    }
+
+    body .top{flex-direction:column;align-items:stretch;gap:12px;}
+    body .top h1{font-size:24px;}
+    body .stats{grid-template-columns:1fr 1fr;gap:10px;}
+    body .panel{padding:14px;}
+
+    /* 16px تمنع تكبير آيفون التلقائي عند الضغط على حقل */
+    body input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    body select,
+    body textarea{font-size:16px;}
+}
+
+@media (max-width:420px){
+    body .stats{grid-template-columns:1fr;}
+}
